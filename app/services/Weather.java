@@ -22,7 +22,6 @@ public class Weather {
     }
 
     public Double fetchTemperature() {
-        Logger.warn(appId);
         WSRequest request = ws.url(baseUrl);
         WSRequest complexRequest = request.setQueryParameter("zip", "07030")
                 .setQueryParameter("appid", appId);
@@ -32,7 +31,6 @@ public class Weather {
         String temp;
 
         try {
-            Logger.warn(json.get().toString());
             temp = json.get().get("main").get("temp").asText();
             return Double.valueOf(temp) - 273.15;
         } catch(Exception e){
