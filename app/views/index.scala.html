@@ -1,0 +1,34 @@
+@*
+ * This template takes a single argument, a String containing a
+ * message to display.
+ *@
+@(temperature: Double, feedbackStore: services.FeedbackStore)
+
+@*
+ * Call the the `main` template with two arguments. The first
+ * argument is a `String` with the title of the page, the second
+ * argument is an `Html` object containing the body of the page.
+ *@
+@main("Welcome to iThermostat") {
+
+    @*
+     * Get an `Html` object by calling the built-in Play welcome
+     * template and passing a `String` message.
+     *@
+    <p>Current outdoor temperature: @temperature ˚C</p>
+    <p>Current indoor temperature: @temperature</p>
+
+    <ul>
+        @for(feedback <- feedbackStore.getFeedbackList){
+            <li>@feedback.getType()</li>
+        }
+    </ul>
+
+    <form method="POST" action="/feedback">
+        <input type="radio" name="type" value="-1">Get lower<br>
+        <input type="radio" name="type" value="0">Stay unchanged<br>
+        <input type="radio" name="type" value="1">Get higher<br>
+        <input type="submit" value="Submit"></input>
+    </form>
+
+}
