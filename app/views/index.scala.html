@@ -20,7 +20,7 @@
 
     <ul>
         @for(feedback <- feedbackStore.getFeedbackList){
-            <li>@feedback.getType()</li>
+            <li>@feedback.getType() @feedback.getCreatedAt()</li>
         }
     </ul>
 
